@@ -1,0 +1,145 @@
+This setup includes two complete applications: a rule-based evaluation system and a real-time weather monitoring system. Below is a summary of each application's components.
+
+### Application 1: Rule-Based Evaluation System
+1. **Backend**
+   - **Node.js AST Model**: Defines the `Node` class to structure nodes for the Abstract Syntax Tree (AST).
+   - **Rule Parsing & Evaluation**:
+     - `parseRule(ruleString)`: Converts a rule string into an AST.
+     - `evaluateRule(ast, data)`: Traverses the AST and evaluates it using provided data.
+   - **MongoDB Model**: The `RuleModel` schema stores the AST in MongoDB.
+   - **Express API**: Routes to create and evaluate rules.
+
+2. **Frontend (React)**
+   - **Rule Creation Form**: Allows users to create and submit rules.
+   - **Rule Evaluation Form**: Users can input data and ASTs for evaluation, with results logged in the console.
+
+### Application 2: Real-Time Weather Monitoring System
+1. **Backend**
+   - **Weather API Call**: Fetches current weather data using OpenWeatherMap's API.
+   - **Data Aggregation**: Computes average, maximum, and minimum temperature along with the most frequent weather condition for daily data.
+
+2. **Frontend (React)**
+   - **Weather Summary Display**: Displays the aggregated weather data (average temperature, min/max temperatures, and dominant weather condition) to the user.
+
+These applications combine Node.js for backend logic, MongoDB for storage, and React for frontend interaction, demonstrating a full-stack approach to real-time monitoring and rule-based decision-making. Let me know if you'd like further details on any part or if you’re interested in expanding functionalities!
+Here's a README template for GitHub, summarizing the code structure and functionality:
+
+---
+
+# Rule-Based Evaluation and Real-Time Weather Monitoring System
+
+This project contains two main applications:
+1. A **Rule-Based Evaluation System** that allows users to create and evaluate rules using an Abstract Syntax Tree (AST).
+2. A **Real-Time Weather Monitoring System** that fetches, aggregates, and displays daily weather data.
+
+## Table of Contents
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Application 1: Rule-Based Evaluation System](#application-1-rule-based-evaluation-system)
+- [Application 2: Real-Time Weather Monitoring System](#application-2-real-time-weather-monitoring-system)
+- [Frontend Components](#frontend-components)
+
+---
+
+## Technologies Used
+- **Node.js** and **Express** for the backend
+- **MongoDB** for data storage
+- **React** for the frontend
+- **Axios** for API requests
+- **OpenWeatherMap API** for weather data
+
+---
+
+## Setup and Installation
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/repository-name.git
+    cd repository-name
+    ```
+
+2. **Install backend dependencies**:
+    ```bash
+    npm install
+    ```
+
+3. **Set up MongoDB** and **OpenWeatherMap API Key**:
+    - MongoDB should be running locally or accessible through a URI.
+    - Create a `.env` file with the following:
+      ```plaintext
+      OPENWEATHER_API_KEY=your_openweather_api_key
+      MONGODB_URI=your_mongodb_uri
+      ```
+
+4. **Run the server**:
+    ```bash
+    npm start
+    ```
+
+5. **Run the React frontend** (in a separate terminal):
+    ```bash
+    cd frontend
+    npm install
+    npm start
+    ```
+
+---
+
+## Application 1: Rule-Based Evaluation System
+
+This application allows users to create and evaluate rules using an AST model to store conditions in MongoDB.
+
+### Backend Structure
+
+1. **Node.js AST Model**:
+   - `Node.js` defines the AST structure. Each node has a type (`operator` or `operand`), value, left, and right attributes.
+
+2. **Controller (ruleEngineController.js)**:
+   - `parseRule(ruleString)`: Parses a rule string into an AST.
+   - `createRule`: Creates and stores a rule’s AST in MongoDB.
+   - `evaluateRule(ast, data)`: Recursively evaluates the AST against the given data.
+
+3. **MongoDB Model (RuleModel.js)**:
+   - `RuleModel` schema saves the AST structure for each rule in MongoDB.
+
+4. **Routes (routes.js)**:
+   - `POST /create-rule`: Parses, saves, and returns a rule AST.
+   - `POST /evaluate-rule`: Evaluates data against an AST and returns the result.
+
+### Frontend Components (React)
+
+1. **CreateRule**:
+   - A form to input and submit rule strings.
+   - Sends the rule to the backend to be parsed and saved in MongoDB.
+
+2. **EvaluateRule**:
+   - Accepts an AST (JSON format) and user data.
+   - Evaluates the rule against the data and logs the result.
+
+---
+
+## Application 2: Real-Time Weather Monitoring System
+
+This application fetches weather data from the OpenWeatherMap API and aggregates it daily.
+
+### Backend Structure
+
+1. **Weather API Call**:
+   - `fetchWeatherData(city)`: Fetches real-time weather data for a specified city and converts it to Celsius.
+
+2. **Data Aggregation**:
+   - `aggregateDailyWeather(weatherData)`: Aggregates daily weather data to calculate average, max, and min temperatures, and identifies the most common weather condition.
+
+### Frontend Component (React)
+
+1. **WeatherSummary**:
+   - Displays daily aggregated weather data, including average, min, and max temperatures, and the dominant weather condition.
+
+---
+
+## License
+This project is licensed under the MIT License.
+
+--- 
+
+This README provides a quick overview and instructions for running both applications locally.
